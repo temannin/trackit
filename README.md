@@ -1,5 +1,6 @@
 # TrackIt (Experimental)
 
+> ⚠️ **Warning:**  
 > **TrackIt** is an experimental platform for tracking online prices of dynamic items (like flights, hotels, or products) using Python and Selenium automation. The backend can execute user-supplied Python scripts (including Selenium-based scrapers) in isolated Docker containers, making it easy to automate and monitor price changes over time.
 
 ## Architecture
