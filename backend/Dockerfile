@@ -22,9 +22,6 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends docker-ce-cli && \
     rm -rf /var/lib/apt/lists/*
 
-# (Optional) Overwrite Docker CLI with the one from docker:dind image
-# COPY --from=docker:dind /usr/local/bin/docker /usr/local/bin/
-
 # Set Docker host to use the Docker socket (for DIND)
 ENV DOCKER_HOST=unix:///var/run/docker.sock
 
