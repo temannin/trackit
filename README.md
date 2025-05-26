@@ -1,7 +1,10 @@
 # TrackIt (Experimental)
 
-> ⚠️ **Warning:**  
-> **TrackIt** is an experimental platform for tracking online prices of dynamic items (like flights, hotels, or products) using Python and Selenium automation. The backend can execute user-supplied Python scripts (including Selenium-based scrapers) in isolated Docker containers, making it easy to automate and monitor price changes over time.
+> ⚠️ **Security Warning:**  
+> The backend container mounts the host Docker socket (`/var/run/docker.sock`) to enable Docker-in-Docker. This setup allows code running in the backend container to control the host Docker daemon, which is a **major security risk**.  
+> **Do not use this setup in production or on any sensitive system.**
+
+**TrackIt** is an experimental platform for tracking online prices of dynamic items (like flights, hotels, or products) using Python and Selenium automation. The backend can execute user-supplied Python scripts (including Selenium-based scrapers) in isolated Docker containers, making it easy to automate and monitor price changes over time.
 
 ## Architecture
 
@@ -17,12 +20,6 @@
 
 - **Communication:**  
   - Frontend communicates with backend via HTTP API
-
-## Security Notice
-
-- The backend container mounts the host Docker socket (`/var/run/docker.sock`) to enable Docker-in-Docker.
-- This setup allows code running in the backend container to control the host Docker daemon, which is a **major security risk**.
-- **Do not use this setup in production or on any sensitive system.**
 
 ## Development
 
