@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
@@ -25,7 +26,7 @@ namespace Backend.Controllers
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "docker",
-                    Arguments = "run --rm -i python:3.11 python",
+                    Arguments = "run -i --init --cap-add=SYS_ADMIN --rm ghcr.io/puppeteer/puppeteer:latest node -",
                     RedirectStandardInput = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -34,23 +35,22 @@ namespace Backend.Controllers
                 }
             };
 
-            _logger.LogInformation("Running Docker container with Python code...");
-
             process.Start();
 
-            // Write code into Docker container's stdin
+            // Send the raw JavaScript script to stdin
             await process.StandardInput.WriteAsync(request.Code);
-            process.StandardInput.Close();
+            process.StandardInput.Close(); // Important: signal EOF to node
 
-            string output = await process.StandardOutput.ReadToEndAsync();
-            string error = await process.StandardError.ReadToEndAsync();
-
+            // Capture output and error
+            string stdout = await process.StandardOutput.ReadToEndAsync();
+            string stderr = await process.StandardError.ReadToEndAsync();
             process.WaitForExit();
 
-            _logger.LogInformation("Docker output: {Output}", output);
-            _logger.LogInformation("Docker error: {Error}", error);
+            // Log or return the result
+            _logger.LogInformation("STDOUT:\n{Stdout}", stdout);
+            _logger.LogError("STDERR:\n{Stderr}", stderr);
 
-            return Ok(new { output, error });
+            return Ok(new { output = stdout, error = stderr });
         }
     }
 
