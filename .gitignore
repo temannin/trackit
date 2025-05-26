@@ -1,0 +1,59 @@
+# .NET / C# related
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+*.dbmdl
+*.log
+*.pdb
+*.cache
+*.ide/
+*.ncrunch*
+*.localhistory/
+*.vscode/
+TestResults/
+*.DotSettings.user
+*.dotCover
+*.orig
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# npm / Node.js related
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+build/
+coverage/
+*.tgz
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Docker
+*.env
+.env.*
+docker-compose.override.yml
+
+# Logs
+logs/
+*.log
+
+# Misc
+.idea/
+*.iml
+*.swp
+*.swo
+*.bak
+*.tmp
+*.temp
